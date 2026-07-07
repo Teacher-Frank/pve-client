@@ -1,16 +1,16 @@
-# Graph Report - pve-client  (2026-07-06)
+# Graph Report - pve-client  (2026-07-07)
 
 ## Corpus Check
 - 122 files · ~124,803 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 885 nodes · 1445 edges · 61 communities (50 shown, 11 thin omitted)
+- 961 nodes · 1516 edges · 65 communities (55 shown, 10 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `9fed3ade`
+- Built from commit: `87b603b5`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -66,6 +66,10 @@
 - [[_COMMUNITY_engines|engines]]
 - [[_COMMUNITY_overrides|overrides]]
 - [[_COMMUNITY_publishConfig|publishConfig]]
+- [[_COMMUNITY_storage.ts|storage.ts]]
+- [[_COMMUNITY_About terminals in browsers|About terminals in browsers]]
+- [[_COMMUNITY_PxMxTerminal — Design Reasoning|PxMxTerminal — Design Reasoning]]
+- [[_COMMUNITY_Response Formats|Response Formats]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `Client` - 69 edges
@@ -98,7 +102,7 @@
 - 3-file cycle: `src/api/index.ts -> src/api/version.ts -> src/index.ts -> src/api/index.ts`
 - 3-file cycle: `src/helpers/Terminal.ts -> src/helpers/terminal-bridge.ts -> src/helpers/terminal-utils.ts -> src/helpers/Terminal.ts`
 
-## Communities (61 total, 11 thin omitted)
+## Communities (65 total, 10 thin omitted)
 
 ### Community 0 - "WebSocket Dependencies"
 Cohesion: 0.07
@@ -109,8 +113,8 @@ Cohesion: 0.08
 Nodes (47): add(), Ae(), at(), Be(), Ce(), constructor(), createComponents(), De() (+39 more)
 
 ### Community 2 - "APT API"
-Cohesion: 0.10
-Nodes (31): aptFactory(), cephFactory(), stripPath(), disksFactory(), stripPath(), firewallFactory(), stripPath(), hardwareFactory() (+23 more)
+Cohesion: 0.09
+Nodes (33): aptFactory(), cephFactory(), stripPath(), disksFactory(), stripPath(), firewallFactory(), stripPath(), hardwareFactory() (+25 more)
 
 ### Community 3 - "Dev Dependencies"
 Cohesion: 0.05
@@ -126,7 +130,7 @@ Nodes (11): EventFilter, EventFilterListener, EventFilterPredicate, EventKey, Ev
 
 ### Community 6 - "Cluster API Tests"
 Cohesion: 0.07
-Nodes (25): Storage(), StorageAPI, VersionAPI, AccessScopedAPI, APIClient, AuthState, ClientOptions, ClusterResource (+17 more)
+Nodes (22): VersionAPI, AccessScopedAPI, APIClient, AuthState, ClientOptions, ClusterResource, ClusterScopedAPI, ClusterTask (+14 more)
 
 ### Community 7 - "ACME Cluster API"
 Cohesion: 0.20
@@ -137,7 +141,7 @@ Cohesion: 0.15
 Nodes (17): acmeFactory(), backupFactory(), cephFactory(), configFactory(), firewallFactory(), haFactory(), Cluster(), jobsFactory() (+9 more)
 
 ### Community 9 - "Auth Example"
-Cohesion: 0.10
+Cohesion: 0.12
 Nodes (3): AccessAPI, PoolsAPI, Client
 
 ### Community 11 - "Display Helpers"
@@ -201,8 +205,8 @@ Cohesion: 0.06
 Nodes (30): Comparison with Alternatives, Conversation memory, Core Concept, Creation, Critical: cross-entity queries, Deletion, Extraction modes, How layering works in practice (+22 more)
 
 ### Community 40 - "Platform Client"
-Cohesion: 0.09
-Nodes (22): add(messages, options?), Batch Methods, batchDelete(memories), batchUpdate(memories), delete(memoryId), deleteAll(options?), deleteUser(data) / deleteUsers(data), Export (+14 more)
+Cohesion: 0.06
+Nodes (33): add(messages, config), add(messages, options?), Batch Methods, batchDelete(memories), batchUpdate(memories), Configuration, delete(memoryId), deleteAll(options?) (+25 more)
 
 ### Community 41 - "Mem0 SDK Guide"
 Cohesion: 0.11
@@ -213,8 +217,8 @@ Cohesion: 0.12
 Nodes (16): Add memories, Client SDK References, Common edge cases, Common integration pattern, Delete a memory, Get all memories, Live documentation search, Mem0 Platform Integration (+8 more)
 
 ### Community 43 - "Mem0 Platform API Reference"
-Cohesion: 0.15
-Nodes (13): Add Response (v3), Endpoints, Filter Constraints, Filter System, Filterable Fields, Get All Response (v3), Mem0 Platform API Reference, Memory Object Structure (+5 more)
+Cohesion: 0.22
+Nodes (9): Endpoints, Filter Constraints, Filter System, Filterable Fields, Mem0 Platform API Reference, Memory Object Structure, Processing Model, Scoping Identifiers (+1 more)
 
 ### Community 44 - "Mem0 Skill for Claude"
 Cohesion: 0.17
@@ -237,12 +241,12 @@ Cohesion: 0.25
 Nodes (8): Async Client, cURL, Mem0 Platform Quickstart, Next Steps, Prerequisites, Python Setup, Sample Response, TypeScript / JavaScript Setup
 
 ### Community 50 - "Mem0 Node.js / TypeScript SDK Reference"
-Cohesion: 0.29
-Nodes (7): Configuration, Installation, Key Differences: Platform vs OSS, Mem0 Node.js / TypeScript SDK Reference, Memory Class, Open Source / Self-Hosted, v2 Compatibility
+Cohesion: 0.05
+Nodes (40): [1.0.0] - 2026-02-25, [1.1.0] - 2026-04-09, [1.2.0] - 2026-05-07, Added, API Modules, API Token *(recommended)*, Auth check, Authentication (+32 more)
 
 ### Community 51 - "Methods"
-Cohesion: 0.40
-Nodes (4): add(messages, config), get(memoryId) / getAll(config) / update(memoryId, data) / delete(memoryId) / deleteAll(config) / history(memoryId), Methods, search(query, config)
+Cohesion: 0.14
+Nodes (13): Attempt 1: Shared importable mock module, Attempt 2: `vi.hoisted` + shared module with `vi.mock` inside, Attempt 3: Non-exported hoisted value + getter function, Attempt 4: Compile-time include directive (✅ Working), ESLint complication, Files Created, Final Result ✅, Goal (+5 more)
 
 ### Community 52 - "dependencies"
 Cohesion: 0.50
@@ -260,25 +264,45 @@ Nodes (3): release, branches, plugins
 Cohesion: 0.67
 Nodes (3): repository, type, url
 
+### Community 56 - "lxc.ts"
+Cohesion: 0.18
+Nodes (10): 1.0.0 (2026-02-25), [1.1.0](https://github.com/AlexanderSlaa/pve-client/compare/v1.0.0...v1.1.0) (2026-04-09), [1.2.0](https://github.com/AlexanderSlaa/pve-client/compare/v1.1.0...v1.2.0) (2026-05-29), [1.2.1](https://github.com/AlexanderSlaa/pve-client/compare/v1.2.0...v1.2.1) (2026-06-01), Bug Fixes, Bug Fixes, Bug Fixes, Features (+2 more)
+
+### Community 61 - "storage.ts"
+Cohesion: 0.40
+Nodes (3): Storage(), StorageAPI, createAPI()
+
+### Community 62 - "About terminals in browsers"
+Cohesion: 0.40
+Nodes (4): About terminals in browsers, Debugging and Lessons Learned, Main Issues (as of May 2026), Maintenance
+
+### Community 63 - "PxMxTerminal — Design Reasoning"
+Cohesion: 0.40
+Nodes (4): Architecture, Goal, Problem, PxMxTerminal — Design Reasoning
+
+### Community 64 - "Response Formats"
+Cohesion: 0.50
+Nodes (4): Add Response (v3), Get All Response (v3), Response Formats, Search Response
+
 ## Knowledge Gaps
-- **392 isolated node(s):** `What This Skill Does`, `CLI (Claude Code, OpenCode, OpenClaw, or any tool that supports skills)`, `Claude.ai`, `Claude API (Skills API)`, `Prerequisites` (+387 more)
+- **443 isolated node(s):** `baseUrl`, `apiToken`, `client`, `client`, `$schema` (+438 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **11 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **10 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `ws` connect `WebSocket Dependencies` to `Display Helpers`, `dependencies`?**
-  _High betweenness centrality (0.091) - this node is a cross-community bridge._
+  _High betweenness centrality (0.077) - this node is a cross-community bridge._
 - **Why does `dependencies` connect `dependencies` to `WebSocket Dependencies`, `Package Configuration`?**
-  _High betweenness centrality (0.090) - this node is a cross-community bridge._
+  _High betweenness centrality (0.076) - this node is a cross-community bridge._
 - **Why does `NoVNCFacade` connect `noVNC Facade` to `noVNC Helpers`, `noVNC Connect Logic`, `noVNC Backoff Logic`, `Cluster API Tests`?**
-  _High betweenness centrality (0.057) - this node is a cross-community bridge._
-- **What connects `What This Skill Does`, `CLI (Claude Code, OpenCode, OpenClaw, or any tool that supports skills)`, `Claude.ai` to the rest of the system?**
-  _397 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.049) - this node is a cross-community bridge._
+- **What connects `Fetch content from a URL.`, `Search Mem0 documentation using Mintlify's search API.     Falls back to the llm`, `Fetch a specific documentation page.` to the rest of the system?**
+  _448 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `WebSocket Dependencies` be split into smaller, more focused modules?**
   _Cohesion score 0.07242063492063493 - nodes in this community are weakly interconnected._
 - **Should `Docs Generated Assets` be split into smaller, more focused modules?**
   _Cohesion score 0.07744107744107744 - nodes in this community are weakly interconnected._
 - **Should `APT API` be split into smaller, more focused modules?**
-  _Cohesion score 0.09898242368177614 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.09306122448979592 - nodes in this community are weakly interconnected._

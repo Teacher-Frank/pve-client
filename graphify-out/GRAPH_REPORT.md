@@ -1,16 +1,16 @@
 # Graph Report - pve-client  (2026-07-07)
 
 ## Corpus Check
-- 122 files · ~124,803 words
+- 135 files · ~139,013 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 961 nodes · 1516 edges · 65 communities (55 shown, 10 thin omitted)
+- 1261 nodes · 1826 edges · 80 communities (70 shown, 10 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `87b603b5`
+- Built from commit: `7ad7305f`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -70,6 +70,20 @@
 - [[_COMMUNITY_About terminals in browsers|About terminals in browsers]]
 - [[_COMMUNITY_PxMxTerminal — Design Reasoning|PxMxTerminal — Design Reasoning]]
 - [[_COMMUNITY_Response Formats|Response Formats]]
+- [[_COMMUNITY_Platform Client|Platform Client]]
+- [[_COMMUNITY_Platform Features -- Mem0 Platform|Platform Features -- Mem0 Platform]]
+- [[_COMMUNITY_Mem0 Use Cases & Examples|Mem0 Use Cases & Examples]]
+- [[_COMMUNITY_Platform Client|Platform Client]]
+- [[_COMMUNITY_Mem0 Platform Architecture|Mem0 Platform Architecture]]
+- [[_COMMUNITY_Mem0 SDK Guide|Mem0 SDK Guide]]
+- [[_COMMUNITY_Mem0 Platform API Reference|Mem0 Platform API Reference]]
+- [[_COMMUNITY_Mem0 Skill for Claude|Mem0 Skill for Claude]]
+- [[_COMMUNITY_Mem0 Integration Patterns|Mem0 Integration Patterns]]
+- [[_COMMUNITY_mem0_doc_search.py|mem0_doc_search.py]]
+- [[_COMMUNITY_Python vs TypeScript SDK Differences|Python vs TypeScript SDK Differences]]
+- [[_COMMUNITY_Mem0 Platform Integration|Mem0 Platform Integration]]
+- [[_COMMUNITY_Mem0 Platform Quickstart|Mem0 Platform Quickstart]]
+- [[_COMMUNITY_Step 3 Core operations|Step 3: Core operations]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `Client` - 69 edges
@@ -102,7 +116,7 @@
 - 3-file cycle: `src/api/index.ts -> src/api/version.ts -> src/index.ts -> src/api/index.ts`
 - 3-file cycle: `src/helpers/Terminal.ts -> src/helpers/terminal-bridge.ts -> src/helpers/terminal-utils.ts -> src/helpers/Terminal.ts`
 
-## Communities (65 total, 10 thin omitted)
+## Communities (80 total, 10 thin omitted)
 
 ### Community 0 - "WebSocket Dependencies"
 Cohesion: 0.07
@@ -249,8 +263,8 @@ Cohesion: 0.14
 Nodes (13): Attempt 1: Shared importable mock module, Attempt 2: `vi.hoisted` + shared module with `vi.mock` inside, Attempt 3: Non-exported hoisted value + getter function, Attempt 4: Compile-time include directive (✅ Working), ESLint complication, Files Created, Final Result ✅, Goal (+5 more)
 
 ### Community 52 - "dependencies"
-Cohesion: 0.50
-Nodes (4): dependencies, @novnc/novnc, terminal.js, wcwidth
+Cohesion: 0.40
+Nodes (5): dependencies, mem0ai, @novnc/novnc, terminal.js, wcwidth
 
 ### Community 53 - "exports"
 Cohesion: 0.50
@@ -284,8 +298,64 @@ Nodes (4): Architecture, Goal, Problem, PxMxTerminal — Design Reasoning
 Cohesion: 0.50
 Nodes (4): Add Response (v3), Get All Response (v3), Response Formats, Search Response
 
+### Community 65 - "Platform Client"
+Cohesion: 0.05
+Nodes (39): add(messages, **kwargs), add(messages, *, user_id, agent_id, run_id, metadata, infer=True), AsyncMemory, AsyncMemoryClient (Asynchronous), batch_delete(memories), Batch Methods, batch_update(memories), Configuration (+31 more)
+
+### Community 66 - "Platform Features -- Mem0 Platform"
+Cohesion: 0.05
+Nodes (42): Advanced Retrieval, Available MCP Tools, Best Practices, Configuration, Configuration, Create Webhook, Criteria Retrieval, Custom Categories (+34 more)
+
+### Community 67 - "Mem0 Use Cases & Examples"
+Cohesion: 0.05
+Nodes (36): 1. Personalized AI Companion, 2. Customer Support with Categories, 3. Healthcare Coach, 4. Content Creation Workflow, 5. Multi-Agent / Multi-Tenant, 6. Personalized Search, 7. Email Intelligence, Common Patterns Across Use Cases (+28 more)
+
+### Community 68 - "Platform Client"
+Cohesion: 0.06
+Nodes (33): add(messages, config), add(messages, options?), Batch Methods, batchDelete(memories), batchUpdate(memories), Configuration, delete(memoryId), deleteAll(options?) (+25 more)
+
+### Community 69 - "Mem0 Platform Architecture"
+Cohesion: 0.06
+Nodes (30): Comparison with Alternatives, Conversation memory, Core Concept, Creation, Critical: cross-entity queries, Deletion, Extraction modes, How layering works in practice (+22 more)
+
+### Community 70 - "Mem0 SDK Guide"
+Cohesion: 0.11
+Nodes (18): add() -- Store Memories, Additional Methods, Advanced Add Options, Batch Operations (TypeScript), Breaking Changes in v3, Common Filter Patterns, Common Pitfalls, delete() / deleteAll() -- Remove Memories (+10 more)
+
+### Community 71 - "Mem0 Platform API Reference"
+Cohesion: 0.15
+Nodes (13): Add Response (v3), Endpoints, Filter Constraints, Filter System, Filterable Fields, Get All Response (v3), Mem0 Platform API Reference, Memory Object Structure (+5 more)
+
+### Community 72 - "Mem0 Skill for Claude"
+Cohesion: 0.17
+Nodes (11): Claude.ai, Claude API (Skills API), CLI (Claude Code, OpenCode, OpenClaw, or any tool that supports skills), Installation, License, Links, Mem0 Skill for Claude, Prerequisites (+3 more)
+
+### Community 73 - "Mem0 Integration Patterns"
+Cohesion: 0.17
+Nodes (12): All Supported Frameworks, AutoGen, Common Pattern, CrewAI, LangChain, LangGraph, LlamaIndex, Mem0 Integration Patterns (+4 more)
+
+### Community 74 - "mem0_doc_search.py"
+Cohesion: 0.27
+Nodes (11): fetch_page(), fetch_url(), get_index(), list_section(), main(), Fetch a specific documentation page., Fetch the full documentation index from llms.txt., List all known pages in a documentation section. (+3 more)
+
+### Community 75 - "Python vs TypeScript SDK Differences"
+Cohesion: 0.18
+Nodes (11): Architectural Differences, Common Gotcha, Constructor, Entity ID Passing (v3), Method Naming, OSS Config Naming, OSS Scope Parameter Naming, Parameter Passing (+3 more)
+
+### Community 76 - "Mem0 Platform Integration"
+Cohesion: 0.20
+Nodes (10): Client SDK References, Common edge cases, Common integration pattern, Live documentation search, Mem0 Platform Integration, Platform References, Related Mem0 Skills, Step 1: Install and authenticate (+2 more)
+
+### Community 78 - "Mem0 Platform Quickstart"
+Cohesion: 0.25
+Nodes (8): Async Client, cURL, Mem0 Platform Quickstart, Next Steps, Prerequisites, Python Setup, Sample Response, TypeScript / JavaScript Setup
+
+### Community 79 - "Step 3: Core operations"
+Cohesion: 0.33
+Nodes (6): Add memories, Delete a memory, Get all memories, Search memories, Step 3: Core operations, Update a memory
+
 ## Knowledge Gaps
-- **443 isolated node(s):** `baseUrl`, `apiToken`, `client`, `client`, `$schema` (+438 more)
+- **653 isolated node(s):** `What This Skill Does`, `CLI (Claude Code, OpenCode, OpenClaw, or any tool that supports skills)`, `Claude.ai`, `Claude API (Skills API)`, `Prerequisites` (+648 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **10 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -293,13 +363,13 @@ Nodes (4): Add Response (v3), Get All Response (v3), Response Formats, Search Re
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `ws` connect `WebSocket Dependencies` to `Display Helpers`, `dependencies`?**
-  _High betweenness centrality (0.077) - this node is a cross-community bridge._
+  _High betweenness centrality (0.044) - this node is a cross-community bridge._
 - **Why does `dependencies` connect `dependencies` to `WebSocket Dependencies`, `Package Configuration`?**
-  _High betweenness centrality (0.076) - this node is a cross-community bridge._
-- **Why does `NoVNCFacade` connect `noVNC Facade` to `noVNC Helpers`, `noVNC Connect Logic`, `noVNC Backoff Logic`, `Cluster API Tests`?**
-  _High betweenness centrality (0.049) - this node is a cross-community bridge._
-- **What connects `Fetch content from a URL.`, `Search Mem0 documentation using Mintlify's search API.     Falls back to the llm`, `Fetch a specific documentation page.` to the rest of the system?**
-  _448 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.043) - this node is a cross-community bridge._
+- **Why does `TerminalSession` connect `WebSocket Dependencies` to `Cluster API Tests`?**
+  _High betweenness centrality (0.026) - this node is a cross-community bridge._
+- **What connects `What This Skill Does`, `CLI (Claude Code, OpenCode, OpenClaw, or any tool that supports skills)`, `Claude.ai` to the rest of the system?**
+  _663 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `WebSocket Dependencies` be split into smaller, more focused modules?**
   _Cohesion score 0.07242063492063493 - nodes in this community are weakly interconnected._
 - **Should `Docs Generated Assets` be split into smaller, more focused modules?**

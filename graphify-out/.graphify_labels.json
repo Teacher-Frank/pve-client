@@ -63,5 +63,20 @@
   "61": "storage.ts",
   "62": "About terminals in browsers",
   "63": "PxMxTerminal — Design Reasoning",
-  "64": "Response Formats"
+  "64": "Response Formats",
+  "65": "Platform Client",
+  "66": "Platform Features -- Mem0 Platform",
+  "67": "Mem0 Use Cases & Examples",
+  "68": "Platform Client",
+  "69": "Mem0 Platform Architecture",
+  "70": "Mem0 SDK Guide",
+  "71": "Mem0 Platform API Reference",
+  "72": "Mem0 Skill for Claude",
+  "73": "Mem0 Integration Patterns",
+  "74": "mem0_doc_search.py",
+  "75": "Python vs TypeScript SDK Differences",
+  "76": "Mem0 Platform Integration",
+  "77": "SKILL.md",
+  "78": "Mem0 Platform Quickstart",
+  "79": "Step 3: Core operations"
 }
