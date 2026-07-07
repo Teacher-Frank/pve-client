@@ -58,6 +58,7 @@
   },
   "dependencies": {
     "@novnc/novnc": "^1.7.0",
+    "mem0ai": "^3.0.13",
     "terminal.js": "https://github.com/Gottox/terminal.js/archive/b6fe3562c95f200b327e865fc5b33df8744ea0ac.tar.gz",
     "wcwidth": "^1.0.1",
     "ws": "^8.21.0"
