@@ -59,9 +59,5 @@
   "57": "vite.config.ts",
   "58": "engines",
   "59": "overrides",
-  "60": "publishConfig",
-  "61": "storage.ts",
-  "62": "About terminals in browsers",
-  "63": "PxMxTerminal — Design Reasoning",
-  "64": "Response Formats"
+  "60": "publishConfig"
 }
