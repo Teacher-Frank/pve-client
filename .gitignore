@@ -153,3 +153,6 @@ generated
 *.key
 *.pem
 *.pub
+
+# Graphify output
+graphify-out/
