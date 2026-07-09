@@ -2,9 +2,17 @@ import EventEmitter from "node:events";
 import type { ClusterAPI } from "../api/cluster/types.js";
 import type { Client } from "../index.js";
 import WS from "ws";
-import TerminalJS from "terminal.js";
-import type { TermState } from "terminal.js";
+import type { TermState } from "terminal.js"
 import { rawToBuffer } from "./terminal-utils.js";
+
+let terminalModule: typeof import("terminal.js")["default"];
+async function getTerminalModuleImpl() {
+	if (!terminalModule) {
+		const m = await import("terminal.js");
+		terminalModule = m.default ?? m;
+	}
+	return terminalModule;
+}
 
 type VMType = "qemu" | "lxc";
 type ClusterResource = ClusterAPI["/cluster/resources"]["GET"]["return"][number];
@@ -173,7 +181,9 @@ export class TerminalRenderer extends EventEmitter<{
   render: [TerminalRendererState];
   error: [Error];
 }> {
-  private terminal: InstanceType<typeof TerminalJS>;
+  /** Lazily-loaded — only imported on first usage. */
+  private terminal: any | null = null;
+  private terminalLoaded = false;
   private columns: number = 80;
   private rows: number = 24;
 
@@ -181,60 +191,79 @@ export class TerminalRenderer extends EventEmitter<{
     super();
     this.columns = columns;
     this.rows = rows;
-    this.terminal = new TerminalJS({ columns, rows });
   }
 
-  /**
-   * Feed data to the terminal emulator.
-   * Parses escape sequences and updates the terminal state.
-   * @param data Raw terminal data (may contain escape sequences)
-   */
-  private static readonly MAX_BUFFER_SIZE = 1024 * 1024; // 1MB
-
-  write(data: Buffer | string): void {
-    try {
-      const str = typeof data === "string" ? data : data.toString("utf8");
-      // Prevent unbounded buffer growth
-      if (str.length > TerminalRenderer.MAX_BUFFER_SIZE) {
-        throw new Error(
-          `TerminalRenderer: input exceeds max buffer size (${TerminalRenderer.MAX_BUFFER_SIZE} bytes)`
-        );
-      }
-      this.terminal.write(str);
-      this.emit("render", this.getState());
-    } catch (error) {
-      const err =
-        error instanceof Error ? error : new Error(String(error));
-      this.emit("error", err);
-    }
+  async initialize() {
+    if (this.terminalLoaded) return;
+    const cls = await getTerminalModuleImpl();
+    this.terminal = new cls({ columns: this.columns, rows: this.rows });
+    this.terminalLoaded = true;
   }
 
-  /**
-   * Resize the terminal
-   * @param columns Number of columns
-   * @param rows Number of rows
-   */
-  resize(columns: number, rows: number): void {
-    this.columns = columns;
-    this.rows = rows;
-    this.terminal.reset();
-    this.terminal = new TerminalJS({ columns, rows });
-    this.emit("render", this.getState());
-  }
+	/**
+	 * Feed data to the terminal emulator.
+	 * Parses escape sequences and updates the terminal state.
+	 * @param data Raw terminal data (may contain escape sequences)
+	 */
+	private static readonly MAX_BUFFER_SIZE = 1024 * 1024; // 1MB
 
-  /** Get the current rendered terminal state */
-  getState(): TerminalRendererState {
-    return {
-      state: this.terminal.getState(),
-      dimensions: { columns: this.columns, rows: this.rows },
-    };
-  }
+	write(data: Buffer | string): void {
+		if (!this.terminalLoaded || !this.terminal) {
+			getTerminalModuleImpl().catch(() => {
+				const err = new Error("TerminalRenderer: terminal.js failed to initialize");
+				this.emit("error", err);
+			});
+			return;
+		}
+		try {
+			const str = typeof data === "string" ? data : data.toString("utf8");
+			// Prevent unbounded buffer growth
+			if (str.length > TerminalRenderer.MAX_BUFFER_SIZE) {
+				throw new Error(
+					`TerminalRenderer: input exceeds max buffer size (${TerminalRenderer.MAX_BUFFER_SIZE} bytes)`
+				);
+			}
+			this.terminal.write(str);
+			this.emit("render", this.getState());
+		} catch (error) {
+			const err =
+				error instanceof Error ? error : new Error(String(error));
+			this.emit("error", err);
+		}
+	}
 
-  /** Clear the terminal */
-  clear(): void {
-    this.terminal.reset();
-    this.emit("render", this.getState());
-  }
+	/**
+	 * Resize the terminal
+	 * @param columns Number of columns
+	 * @param rows Number of rows
+	 */
+	resize(columns: number, rows: number): void {
+		if (!this.terminalLoaded || !this.terminal) return;
+		this.columns = columns;
+		this.rows = rows;
+		this.terminal.reset();
+		const mod = terminalModule;
+		this.terminal = new mod({ columns, rows });
+		this.emit("render", this.getState());
+	}
+
+	/** Get the current rendered terminal state */
+	getState(): TerminalRendererState {
+		if (!this.terminalLoaded || !this.terminal) {
+			throw new Error("TerminalRenderer: not initialized — call initialize() first");
+		}
+		return {
+			state: this.terminal.getState(),
+			dimensions: { columns: this.columns, rows: this.rows },
+		};
+	}
+
+	/** Clear the terminal */
+	clear(): void {
+		if (!this.terminalLoaded || !this.terminal) return;
+		this.terminal.reset();
+		this.emit("render", this.getState());
+	}
 }
 
 // ---------------------------------------------------------------------------
