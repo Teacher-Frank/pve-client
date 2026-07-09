@@ -31,6 +31,8 @@ export type TerminalTicket = {
   user: string;
 };
 
+export type TerminalSerialPort = "serial0" | "serial1" | "serial2" | "serial3";
+
 export type TerminalConnectionInfo = {
   vmid: number;
   node: string;
@@ -38,6 +40,8 @@ export type TerminalConnectionInfo = {
   ticket: TerminalTicket;
   websocketUrl: string;
   authMessage: string;
+  /** Serial port connected to (QEMU VMs only) */
+  serialPort?: TerminalSerialPort;
 };
 
 export enum TerminalState {
@@ -84,6 +88,12 @@ export type TerminalOpenOptions = {
    * If provided, the renderer will receive all incoming data.
    */
   renderer?: TerminalRenderer;
+  /**
+   * Serial port to connect to (QEMU VMs only). Default `serial0`.
+   * Each port is an independent session — `serial1`–`serial3` enable
+   * up to 4 simultaneous terminal windows per VM.
+   */
+  serialPort?: TerminalSerialPort;
 };
 
 export type TerminalBrowserMessage =
@@ -550,10 +560,12 @@ export class Terminal {
    * Create a terminal helper for a specific VM or container.
    * @param vmid VM/container ID
    * @param client Authenticated Proxmox client
+   * @param serialPort Serial port to connect to (QEMU VMs only; default `serial0`)
    */
   constructor(
     private readonly vmid: string | number,
-    private readonly client: Client
+    private readonly client: Client,
+    private readonly serialPort: TerminalSerialPort = "serial0"
   ) {}
 
   /**
@@ -580,6 +592,9 @@ export class Terminal {
           vmid:
             typeof vm.vmid === "string" ? parseInt(vm.vmid, 10) : vm.vmid,
         },
+        // Non-$ params are auto-wrapped into form body for POST.
+        // Only pass `serial` for QEMU VMs; LXC termproxy has no serial param.
+        ...(vm.type === "qemu" ? { serial: this.serialPort } : {}),
       }
     );
     this.cachedTicket = ticket as TerminalTicket;
@@ -608,6 +623,7 @@ export class Terminal {
       ticket,
       websocketUrl: wsUrl.toString(),
       authMessage: `${ticket.user}:${ticket.ticket}\n`,
+      serialPort: vm.type === "qemu" ? this.serialPort : undefined,
     };
   }
 

@@ -16,7 +16,7 @@ import Version from "./api/version.js";
 import {Display} from "./helpers/Display.js";
 import {NoVNCFacade} from "./helpers/NoVNC.js";
 import {Terminal, TerminalRenderer, TerminalSession, TerminalState, bridgeTerminalSessionToSocket, openTerminalBridge} from "./helpers/Terminal.js";
-import type {TerminalTicket, TerminalConnectionInfo, TerminalOpenOptions, TerminalRendererState, TerminalPipe, TerminalBridgeOptions, TerminalBrowserSocket, TerminalBrowserMessage} from "./helpers/Terminal.js";
+import type {TerminalTicket, TerminalConnectionInfo, TerminalOpenOptions, TerminalRendererState, TerminalPipe, TerminalBridgeOptions, TerminalBrowserSocket, TerminalBrowserMessage, TerminalSerialPort} from "./helpers/Terminal.js";
 import type {NoVNCConnectionOptions, NoVNCViewportOptions, NoVNCQualityOptions, NoVNCEventMap, NoVNCEventName, NoVNCReconnectOptions, NoVNCReconnectAttempt} from "./helpers/NoVNC.js";
 import {TimerPulledEventEmitter} from "./helpers/TimerPulledEventEmitter.js";
 
@@ -236,9 +236,10 @@ export class Client {
     };
 
     public readonly helpers = {
-        terminal: (vmid: string | number): Terminal => {
+        terminal: (vmid: string | number, serialPort?: TerminalSerialPort): Terminal => {
             // Terminal now supports both login-cookie auth and API-token auth.
-            return new Terminal(vmid, this);
+            // serialPort enables multi-terminal sessions (serial0–serial3 for QEMU).
+            return new Terminal(vmid, this, serialPort);
         },
         display: (vmid: string | number): Display => new Display(vmid, this),
     };
