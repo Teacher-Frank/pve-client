@@ -5,7 +5,7 @@ import type { NodesAPI } from '../../src/api/nodes/types.js';
  * Canary test: cicommand is NOT a valid Proxmox QEMU config parameter.
  *
  * Background:
- * - `action-template-deployers.ts` in svelte-playground added a `cicommand`
+ * - `action-template-deployers.ts` in Datalab Selfservice added a `cicommand`
  *   parameter to the PUT /nodes/{node}/qemu/{vmid}/config body, intending to
  *   auto-install qemu-guest-agent via cloud-init on first boot.
  * - This parameter does not exist in the Proxmox API.

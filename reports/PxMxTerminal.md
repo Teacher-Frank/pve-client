@@ -2,7 +2,7 @@
 
 ## Problem
 
-The terminal button in the Proxmox playground page (`PxMxWorkloadControls.svelte`) links to `/proxmox/terminal?vmid=...&node=...&type=...`. That route did not exist, so clicking the button returned a 404.
+The terminal button in the Datalab Selfservice page (`PxMxWorkloadControls.svelte`) links to `/proxmox/terminal?vmid=...&node=...&type=...`. That route did not exist, so clicking the button returned a 404.
 
 ## Goal
 
@@ -49,7 +49,7 @@ Used `@xterm/xterm` (v5, scoped packages) and `@xterm/addon-fit` — installed a
 ## File layout (as built)
 
 ```
-playground/
+Datalab Selfservice/
   vite.config.ts                           ← proxmoxTerminalPlugin() added here
   src/
     routes/

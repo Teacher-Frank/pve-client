@@ -44,8 +44,8 @@ describe('Storage API', () => {
     expect(client.request).toHaveBeenCalledWith('/storage/{storage}', 'GET', { $path: { storage: 'local' } });
   });
 
-  // Svelte-playground gap: test that index returns expected structure for UI
-  it('should return an array of storage objects with storage and type fields (svelte-playground gap)', () => {
+  // Datalab Selfservice gap: test that index returns expected structure for UI
+  it('should return an array of storage objects with storage and type fields (Datalab Selfservice gap)', () => {
     const client = { request: vi.fn().mockReturnValue([{ storage: 'local', type: 'dir' }, { storage: 'backup', type: 'pbs' }]) } as unknown as Client;
     const api = Storage(client);
     const result = api.index();

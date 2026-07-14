@@ -2,7 +2,10 @@ import EventEmitter from "node:events";
 import type { ClusterAPI } from "../api/cluster/types.js";
 import type { Client } from "../index.js";
 import WS from "ws";
-import type { TermState } from "terminal.js"
+import type { TermState } from "terminal.js";
+
+type TerminalInstance = InstanceType<typeof import("terminal.js")["default"]>;
+
 import { rawToBuffer } from "./terminal-utils.js";
 
 let terminalModule: typeof import("terminal.js")["default"];
@@ -192,7 +195,7 @@ export class TerminalRenderer extends EventEmitter<{
   error: [Error];
 }> {
   /** Lazily-loaded — only imported on first usage. */
-  private terminal: any | null = null;
+  private terminal: TerminalInstance | null = null;
   private terminalLoaded = false;
   private columns: number = 80;
   private rows: number = 24;

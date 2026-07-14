@@ -311,7 +311,7 @@ describe('API Endpoints', () => {
 		expect(result).toBe(mockPci);
 	});
 
-	// Usage: svelte-playground creates LXC containers with nodeApi.lxc.create({$body})
+	// Usage: Datalab Selfservice creates LXC containers with nodeApi.lxc.create({$body})
 	// node-scoped API already pre-binds node from nodes.get(node)
 	it('calls POST /nodes/{node}/lxc via nodeApi.lxc.create(args)', async () => {
 		const client = new Client({
@@ -341,7 +341,7 @@ describe('API Endpoints', () => {
 		expect(upid).toBe('UPID:pve:001:create');
 	});
 
-	// Usage: svelte-playground creates VMs with nodeApi.qemu.create({$body})
+	// Usage: Datalab Selfservice creates VMs with nodeApi.qemu.create({$body})
 	// node-scoped API already pre-binds node from nodes.get(node)
 	it('calls POST /nodes/{node}/qemu via nodeApi.qemu.create(args)', async () => {
 		const client = new Client({
@@ -371,7 +371,7 @@ describe('API Endpoints', () => {
 		expect(upid).toBe('UPID:pve:002:create');
 	});
 
-	// Usage: svelte-playground calls guestApi.status.start() where guestApi = nodeApi.qemu.vmid(id)
+	// Usage: Datalab Selfservice calls guestApi.status.start() where guestApi = nodeApi.qemu.vmid(id)
 	// Currently vmid(id) only has clone method; needs status.start/stop/reboot
 	it('calls POST /nodes/{node}/qemu/{vmid}/status/start via nodes.get(node).qemu.vmid(id).status.start()', async () => {
 		const client = new Client({
@@ -392,7 +392,7 @@ describe('API Endpoints', () => {
 		expect(upid).toBe('UPID:pve:003:start');
 	});
 
-	// Usage: svelte-playground calls guestApi.status.stop() where guestApi = nodeApi.qemu.vmid(id)
+	// Usage: Datalab Selfservice calls guestApi.status.stop() where guestApi = nodeApi.qemu.vmid(id)
 	it('calls POST /nodes/{node}/qemu/{vmid}/status/stop via nodes.get(node).qemu.vmid(id).status.stop()', async () => {
 		const client = new Client({
 			baseUrl: 'https://pve.local',
@@ -412,7 +412,7 @@ describe('API Endpoints', () => {
 		expect(upid).toBe('UPID:pve:004:stop');
 	});
 
-	// Usage: svelte-playground calls guestApi.status.reboot() where guestApi = nodeApi.qemu.vmid(id)
+	// Usage: Datalab Selfservice calls guestApi.status.reboot() where guestApi = nodeApi.qemu.vmid(id)
 	it('calls POST /nodes/{node}/qemu/{vmid}/status/reboot via nodes.get(node).qemu.vmid(id).status.reboot()', async () => {
 		const client = new Client({
 			baseUrl: 'https://pve.local',
@@ -432,7 +432,7 @@ describe('API Endpoints', () => {
 		expect(upid).toBe('UPID:pve:005:reboot');
 	});
 
-	// Usage: svelte-playground calls guestApi.status.start() where guestApi = nodeApi.lxc.id(id)
+	// Usage: Datalab Selfservice calls guestApi.status.start() where guestApi = nodeApi.lxc.id(id)
 	it('calls POST /nodes/{node}/lxc/{vmid}/status/start via nodes.get(node).lxc.id(vmid).status.start()', async () => {
 		const client = new Client({
 			baseUrl: 'https://pve.local',
@@ -452,7 +452,7 @@ describe('API Endpoints', () => {
 		expect(upid).toBe('UPID:pve:006:start');
 	});
 
-	// Usage: svelte-playground calls guestApi.status.stop() where guestApi = nodeApi.lxc.id(id)
+	// Usage: Datalab Selfservice calls guestApi.status.stop() where guestApi = nodeApi.lxc.id(id)
 	it('calls POST /nodes/{node}/lxc/{vmid}/status/stop via nodes.get(node).lxc.id(vmid).status.stop()', async () => {
 		const client = new Client({
 			baseUrl: 'https://pve.local',
@@ -472,7 +472,7 @@ describe('API Endpoints', () => {
 		expect(upid).toBe('UPID:pve:007:stop');
 	});
 
-	// Usage: svelte-playground calls guestApi.status.reboot() where guestApi = nodeApi.lxc.id(id)
+	// Usage: Datalab Selfservice calls guestApi.status.reboot() where guestApi = nodeApi.lxc.id(id)
 	// For LXC, reboot is actually via /status/reboot endpoint
 	it('calls POST /nodes/{node}/lxc/{vmid}/status/reboot via nodes.get(node).lxc.id(vmid).status.reboot()', async () => {
 		const client = new Client({
